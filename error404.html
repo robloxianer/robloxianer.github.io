@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+            perspective: 1000px;
+            perspective-origin: center center;
+            overflow: hidden;
+        }
+
+        .foldable-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, background-color 0.5s ease;
+        }
+
+        .foldable-container:hover {
+            transform: rotateX(20deg) rotateY(-20deg);
+            background-color: #e6e6e6;
+        }
+
+        .foldable-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+            transition: color 0.5s ease;
+        }
+
+        .foldable-container:hover .foldable-text {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="foldable-container">
+        <div class="foldable-text">404 - Seite nicht gefunden</div>
+    </div>
+
+    <script>
+        var audio = new Audio('/808-kick-sample-9192.mp3');
+
+        document.addEventListener('mousemove', function(e) {
+            var foldableContainer = document.querySelector('.foldable-container');
+            var mouseX = e.clientX;
+            var mouseY = e.clientY;
+            var offsetX = (mouseX - window.innerWidth / 2) * 0.1;
+            var offsetY = (mouseY - window.innerHeight / 2) * 0.1;
+            foldableContainer.style.transform = `perspective(1000px) rotateX(${offsetY}deg) rotateY(${offsetX}deg)`;
+            audio.play();
+        });
+    </script>
+</body>
+</html>
